@@ -11,7 +11,7 @@ class PostsController extends Controller
 {
     public function store(Request $request) {
         $validate_data = $request->validate([
-            'data.attributes.body'=> 'required'
+            'data.attributes.body'=> 'required' 
         ]);
         $post = auth()->user()->posts()->create($validate_data['data']['attributes']);
         return new PostResource($post);

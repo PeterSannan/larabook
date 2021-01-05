@@ -21,7 +21,7 @@ class UserResource extends JsonResource
                 'name' => $this->name
             ],
             'links' => [
-                'self' => url('/users/' . $this->id)
+                'self' => url('/api/users/' . $this->id)
             ]
         ];
     }

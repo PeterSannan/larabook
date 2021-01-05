@@ -19,6 +19,8 @@ class PostResource extends JsonResource
             'id' => $this->id,
             'attributes' => [
                 'posted_by' => new UserResource($this->user),
+                'image' => $this->image,
+                'posted_at' => $this->created_at->diffForHumans(),
                 'body' => $this->body
             ],
             'links' => [

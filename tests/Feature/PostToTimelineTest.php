@@ -16,7 +16,7 @@ class PostToTimelineTest extends TestCase
      *
      * @return void
      */
-    public function test_user_can_post_a_text_post()
+    public function test_user_can_post_a_text_post()  //check image
     {
         $this->withoutExceptionHandling();
 
@@ -39,6 +39,8 @@ class PostToTimelineTest extends TestCase
                 'id' => $post->id,
                 'attributes' => [
                     'body' => $post->body,
+                    'posted_at' => $post->created_at->diffForHumans(),
+                    'image' => $post->image,
                     'posted_by' => [
                         'attributes' => [
                             'name' => $user->name
