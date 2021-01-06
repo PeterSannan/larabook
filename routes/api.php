@@ -20,7 +20,13 @@ Route::post('register', 'AuthController@register');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('posts', 'PostsController@store');
     Route::get('posts', 'PostsController@index');
-
+    
+    Route::get('users/auth-user', 'UsersController@getAuthUser');
     Route::get('users/{user}', 'UsersController@show');
     Route::get('users/{user}/posts', 'UserPostsController@index');
+
+    Route::post('/friend-request', 'FriendRequestsController@store');
+    Route::put('/friend-request/{friend_request}', 'FriendRequestsController@update');
+    Route::delete('/friend-request/{friend_request}', 'FriendRequestsController@destroy');
+   
 });

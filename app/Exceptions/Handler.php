@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +53,40 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($exception instanceof ValidationException){  
+            return response()->json([
+                "errors"=>[
+                    "code"=>422,
+                    "title"=>'Validation Error',
+                    "description"=>'Your request is malformed or missing fields',
+                    "meta"=>$exception->errors()
+                ]
+                ],422);   
+        }
+
+        if($exception instanceof ModelNotFoundException){  
+            return response()->json([
+                "errors"=>[
+                    "code"=>404,
+                    "title"=>'Resource not found',
+                    "description"=>'The requested resource not found',
+                    "meta"=>$exception->getMessage()
+                ]
+                ],404);   
+        }
+
+        if($exception instanceof AuthorizationException){  
+            return response()->json([
+                "errors"=>[
+                    "code"=>403,
+                    "title"=>'Permission denied',
+                    "description"=>"You don't have permission to access the requested resource not found",
+                    "meta"=>$exception->getMessage()
+                ]
+                ],404);   
+        }
+        
+
         return parent::render($request, $exception);
     }
 }
