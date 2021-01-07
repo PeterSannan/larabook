@@ -20,6 +20,8 @@ class PostResource extends JsonResource
             'attributes' => [
                 'posted_by' => new UserResource($this->user),
                 'image' => $this->image,
+                'likes_count' => $this->likes->count(),
+                'auth_user_liked' => $this->likes()->where('user_id', auth()->id())->exists(),
                 'posted_at' => $this->created_at->diffForHumans(),
                 'body' => $this->body
             ],

@@ -29,4 +29,5 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::put('/friend-request/{friend_request}', 'FriendRequestsController@update');
     Route::delete('/friend-request/{friend_request}', 'FriendRequestsController@destroy');
    
+    Route::post('posts/{post}/likes', 'LikesController@store');
 });
