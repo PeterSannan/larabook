@@ -7,25 +7,10 @@ services:
         volumes: 
             - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
         depends_on: 
-            - larabook_api
-            - larabook_db
+            - larabook_api 
     larabook_api:
         build:
             context: ./dockerfiles
             dockerfile: larabook_api.Dockerfile
         volumes: 
-            - ./:/var/www/larabook_api
-    larabook_db:
-        image: mysql:5.7
-        env_file: 
-            - ./mysql/mysql.env
-        ports: 
-            - 3309:3306
-        volumes: 
-            - ./storage/db:/var/lib/mysql
-    test_larabook_db:
-        image: mysql:5.7
-        env_file: 
-            - ./mysql/test_mysql.env
-        ports: 
-            - 3310:3306
+            - ./:/var/www/larabook_api 
