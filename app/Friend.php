@@ -20,7 +20,16 @@ class Friend extends Model
         ->orWhere(function($query) use ($user_id){
             $query->where('friend_id', auth()->id())
                 ->where('user_id',$user_id);
-        })->first();
-        
+        })->first(); 
+    }
+
+    public static function friendships(){
+        return (new static())
+            ->whereNotNull('confirmed_at')
+            ->where(function($query){
+                $query->where('user_id', auth()->id())
+                ->orWhere('friend_id', auth()->id());
+            })
+            ->get();
     }
 }

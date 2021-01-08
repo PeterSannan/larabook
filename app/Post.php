@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'body'
+        'body',
+        'image'
     ];
 
     protected static function boot(){
@@ -22,5 +23,9 @@ class Post extends Model
 
     public function likes() {
         return $this->belongsToMany(User::class, 'likes', 'post_id', 'user_id');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 }

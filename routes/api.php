@@ -25,9 +25,15 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users/{user}', 'UsersController@show');
     Route::get('users/{user}/posts', 'UserPostsController@index');
 
+    Route::post('users/{user}/images', 'UserImagesController@store');
+
     Route::post('/friend-request', 'FriendRequestsController@store');
     Route::put('/friend-request/{friend_request}', 'FriendRequestsController@update');
     Route::delete('/friend-request/{friend_request}', 'FriendRequestsController@destroy');
    
     Route::post('posts/{post}/likes', 'LikesController@store');
+
+    Route::post('posts/{post}/comments', 'CommentsController@store');
+
+
 });
